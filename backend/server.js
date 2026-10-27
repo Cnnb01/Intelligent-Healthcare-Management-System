@@ -227,7 +227,7 @@ app.put("/visit/:visit_id/examine", async(req, res) => {
     const { visit_id } = req.params;
     const { doctor_diagnosis, treatment_plan } = req.body;
     try{
-        const result = await db.query("UPDATE Visits SET doctor_diagnosis=$1, treatment_plan=$2, status='examined' WHERE visit_id=$3 RETURNING *", [doctor_diagnosis, treatment_plan, visit_id]);
+        const result = await db.query("UPDATE Visits SET doctor_diagnosis=$1, treatment_plan=$2, status='Discharged' WHERE visit_id=$3 RETURNING *", [doctor_diagnosis, treatment_plan, visit_id]);
         if(result.rows.length === 0){
             return res.status(404).json({ message: "Visit not found" });
         }
